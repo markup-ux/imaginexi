@@ -1,4 +1,5 @@
 The Grind Was Never the Game
+
 Design Philosophy Behind Imagine XI
 
 This server exists because of a realization.
@@ -13,7 +14,7 @@ This document explains why.
 
 The following chapters are excerpted from The Grind Was Never the Game, and serve as the philosophical foundation of this project.
 
-
+__________________________________________________________________________________
 
 Chapter 1: The Grind Was Never the Game
 
@@ -1201,5 +1202,6 @@ Not perfectly.
 But inevitably.
 
 Because once you understand that the world was built, the next logical step is unavoidable.
+
 
 You begin to build.

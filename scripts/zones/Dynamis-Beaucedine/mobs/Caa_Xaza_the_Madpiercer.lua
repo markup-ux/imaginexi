@@ -1,0 +1,34 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Caa Xaza the Madpiercer
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/remove_doom')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x =  268.450, y = -19.610, z = -111.020 }
+}
+
+entity.phList =
+{
+    [ID.mob.CAA_XAZA_THE_MADPIERCER - 2] = ID.mob.CAA_XAZA_THE_MADPIERCER, -- Vanguard_Visionary
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+end
+
+return entity

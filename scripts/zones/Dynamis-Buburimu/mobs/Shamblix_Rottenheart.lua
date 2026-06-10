@@ -1,0 +1,33 @@
+-----------------------------------
+-- Area: Dynamis - Buburimu
+--  Mob: Shamblix Rottenheart
+-----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
+-----------------------------------
+local ID = zones[xi.zone.DYNAMIS_BUBURIMU]
+-----------------------------------
+---@type TMobEntity
+local entity = {}
+
+entity.spawnPoints =
+{
+    { x = -11.923, y = -15.769, z =  0.747 }
+}
+
+entity.phList =
+{
+    [ID.mob.SHAMBLIX_ROTTENHEART - 4] = ID.mob.SHAMBLIX_ROTTENHEART, -- Vanguard_Tinkerer
+}
+
+entity.onMobSpawn = function(mob)
+    xi.dynamis.mobInfo(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+end
+
+return entity

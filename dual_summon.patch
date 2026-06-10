@@ -1,0 +1,29 @@
+--- a/src/map/spell.cpp
++++ b/src/map/spell.cpp
+@@ -XXX,6 +XXX,30 @@
+     // ... you already have PCaster (CBattleEntity*) and PSpell (CSpell*)
+ 
++    // ---- ImagineXI: Dual Summon gate ------------------------------
++    // Allow SMN mains who already have an AVATAR out to cast SPIRIT spells.
++    // This only green-lights the engine precheck; normal Lua spell logic still runs
++    // and our module will replace the real spirit with an elemental companion.
++    if (auto* PChar = dynamic_cast<CCharEntity*>(PCaster))
++    {
++        // CSpell accessors are in spell.cpp/h (getSpellGroup/getSpellFamily)
++        // SPELLGROUP_SUMMONING / SPELLFAMILY_SPIRIT exist in your enums.
++        if (PChar->GetMJob() == JOB_SMN &&
++            PSpell &&
++            PSpell->getSpellGroup() == SPELLGROUP_SUMMONING &&
++            PSpell->getSpellFamily() == SPELLFAMILY_SPIRIT)
++        {
++            if (PChar->PPet != nullptr)
++            {
++                if (auto* PPet = dynamic_cast<CPetEntity*>(PChar->PPet))
++                {
++                    if (PPet->getPetType() == PET_TYPE::AVATAR)
++                        return true; // let Lua/onMagicCastingCheck handle the rest
++                }
++            }
++        }
++    }
++    // ---- /Dual Summon gate ---------------------------------------

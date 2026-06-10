@@ -1,0 +1,11 @@
+mariadb
+gitpython
+pylint
+pyyaml
+colorama
+zmq
+black
+regex
+argparse
+requests
+bcrypt

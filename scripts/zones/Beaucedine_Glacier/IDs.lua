@@ -1,0 +1,97 @@
+-----------------------------------
+-- Area: Beaucedine_Glacier
+-----------------------------------
+zones = zones or {}
+
+zones[xi.zone.BEAUCEDINE_GLACIER] =
+{
+    text =
+    {
+        CONQUEST_BASE                  = 0,     -- Tallying conquest results...
+        BEASTMEN_BANNER                = 81,    -- There is a beastmen's banner.
+        ITEM_CANNOT_BE_OBTAINED        = 6568,  -- You cannot obtain the item. Come back after sorting your inventory.
+        FULL_INVENTORY_AFTER_TRADE     = 6570,  -- You cannot obtain the <item>. Try trading again after sorting your inventory.
+        ITEM_OBTAINED                  = 6572,  -- Obtained: <item>.
+        GIL_OBTAINED                   = 6573,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED               = 6575,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                   = 6576,  -- Lost key item: <keyitem>.
+        ITEMS_OBTAINED                 = 6581,  -- You obtain <number> <item>!
+        NOTHING_OUT_OF_ORDINARY        = 6586,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET          = 6601,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS            = 7183,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY        = 7184,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                   = 7185,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 7205,  -- Your party is unable to participate because certain members' levels are restricted.
+        FISHING_MESSAGE_OFFSET         = 7250,  -- You can't fish here.
+        CONQUEST                       = 7503,  -- You've earned conquest points!
+        YOU_CANNOT_ENTER_DYNAMIS       = 7883,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
+        PLAYERS_HAVE_NOT_REACHED_LEVEL = 7885,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
+        DYNA_NPC_DEFAULT_MESSAGE       = 7895,  -- There is an unusual arrangement of branches here.
+        GARRISON_BASE                  = 8245,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM            = 8578,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM          = 8579,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM       = 8580,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP           = 8581,  -- You already possess that temporary item.
+        NO_COMBINATION                 = 8586,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN             = 8617,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT   = 8648,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        REGIME_REGISTERED              = 10764, -- New training regime registered!
+        VOIDWALKER_NO_MOB              = 11883, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR         = 11884, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT            = 11885, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB           = 11886, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1        = 11888, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2        = 11889, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI            = 11890, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI           = 11891, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                   = 12781, -- <name> learns <spell>!
+        UNCANNY_SENSATION              = 12783, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL          = 12790, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+    },
+    mob =
+    {
+        GARGANTUA = GetFirstID('Gargantua'),
+        HUMBABA   = GetFirstID('Humbaba'),
+        KIRATA    = GetFirstID('Kirata'),
+        NUE       = GetFirstID('Nue'),
+
+        VOIDWALKER =
+        {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
+                17232159, -- Gorehound
+                17232158, -- Gorehound
+                17232157, -- Gorehound
+                17232156, -- Gorehound
+                17232155, -- Gjenganger
+                17232154, -- Gjenganger
+                17232153, -- Gjenganger
+                17232152, -- Gjenganger
+            },
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
+                17232151, -- Erebus
+                17232150, -- Feuerunke
+            },
+
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
+                17232149, -- Lord Ruthven
+            },
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17232148, -- Yilbegan
+            }
+        }
+    },
+
+    npc =
+    {
+        MIRROR_POND_J8 = GetFirstID('Mirror_Pond_1'),
+        OVERSEER_BASE  = GetFirstID('Parledaire_RK'),
+    },
+}
+
+return zones[xi.zone.BEAUCEDINE_GLACIER]

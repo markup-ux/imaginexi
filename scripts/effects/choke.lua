@@ -1,0 +1,23 @@
+-----------------------------------
+-- xi.effect.CHOKE
+-----------------------------------
+---@type TEffect
+local effectObject = {}
+
+effectObject.onEffectGain = function(target, effect)
+    local statReduction = (effect:getPower() - 1) * 2 + 5 -- Caster merits are included already.
+
+    effect:addMod(xi.mod.REGEN_DOWN, effect:getPower())
+    effect:addMod(xi.mod.VIT, -statReduction)
+
+    target:delStatusEffect(xi.effect.RASP)
+end
+
+effectObject.onEffectTick = function(target, effect)
+end
+
+effectObject.onEffectLose = function(target, effect)
+    xi.magicTp.clearCasterLocalVar(target, 'magicTpElementalDotCasterId')
+end
+
+return effectObject

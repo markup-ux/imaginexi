@@ -8872,7 +8872,7 @@ namespace
     }
 } // namespace
 
-uint16 charutils::GetAppearanceEquipmentModelForRace(CCharEntity* PChar, uint8 equipSlot, uint8 previewRace)
+uint16 GetAppearanceEquipmentModelForRace(CCharEntity* PChar, uint8 equipSlot, uint8 previewRace)
 {
     if (PChar == nullptr || previewRace < 1 || previewRace > 8)
     {

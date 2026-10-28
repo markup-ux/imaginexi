@@ -565,6 +565,11 @@ bool CStatusEffectContainer::AddStatusEffect(std::unique_ptr<CStatusEffect> PSta
                 PChar->UpdateHealth();
             }
         }
+        else if (m_POwner->objtype == TYPE_TRUST && PStatusEffect->GetIcon() != 0)
+        {
+            // Trust icons ride the master's 0x076 party-effects packet.
+            UpdateStatusIcons();
+        }
         m_POwner->updatemask |= UPDATE_HP;
 
         return true;
@@ -576,7 +581,7 @@ bool CStatusEffectContainer::AddStatusEffect(std::unique_ptr<CStatusEffect> PSta
 /************************************************************************
  *                                                                       *
  *  Effects in all methods are removed equally, put this code in         *
- *  separate function. We remove icons only from CharEntity.             *
+ *  separate function. Icons are refreshed for players and trusts.       *
  *                                                                       *
  ************************************************************************/
 
@@ -621,6 +626,10 @@ void CStatusEffectContainer::DeleteStatusEffects()
             PChar->PLatentEffectContainer->CheckLatentsFoodEffect();
             PChar->PLatentEffectContainer->CheckLatentsStatusEffect();
             PChar->PLatentEffectContainer->CheckLatentsRollSong();
+        }
+        else if (m_POwner->objtype == TYPE_TRUST && update_icons)
+        {
+            UpdateStatusIcons();
         }
         m_POwner->UpdateHealth();
     }
@@ -1307,12 +1316,10 @@ auto CStatusEffectContainer::StealStatusEffect(xi::StatusEffectFlag flag, Effect
 
 void CStatusEffectContainer::UpdateStatusIcons()
 {
-    if (m_POwner->objtype != TYPE_PC)
+    if (m_POwner->objtype != TYPE_PC && m_POwner->objtype != TYPE_TRUST)
     {
         return;
     }
-
-    auto* PChar = static_cast<CCharEntity*>(m_POwner);
 
     m_Flags = 0;
     std::memset(m_StatusIcons, static_cast<int>(xi::StatusEffect::None), sizeof(m_StatusIcons));
@@ -1343,6 +1350,23 @@ void CStatusEffectContainer::UpdateStatusIcons()
             }
         }
     }
+    // Trust icons are sent in the master's party-effects packet. Flag the
+    // master so their post-tick pushes that packet.
+    CCharEntity* PChar = nullptr;
+    if (m_POwner->objtype == TYPE_PC)
+    {
+        PChar = static_cast<CCharEntity*>(m_POwner);
+    }
+    else
+    {
+        PChar = dynamic_cast<CCharEntity*>(static_cast<CTrustEntity*>(m_POwner)->PMaster);
+    }
+
+    if (!PChar)
+    {
+        return;
+    }
+
     PChar->m_EffectsChanged = true;
 
     if (PChar->PParty)

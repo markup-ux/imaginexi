@@ -54,6 +54,9 @@ end
 function CSpell:canTargetEnemy()
 end
 
+function CSpell:dealsDamage()
+end
+
 ---@nodiscard
 ---@return xi.magic.aoe
 function CSpell:isAoE()

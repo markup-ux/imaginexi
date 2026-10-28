@@ -21,10 +21,10 @@
 
 #include "0x076_group_effects.h"
 
-#include "entities/char_entity.h"
+#include "entities/battle_entity.h"
 #include "status_effect_container.h"
 
-GP_SERV_COMMAND_GROUP_EFFECTS::GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CCharEntity*>& membersList)
+GP_SERV_COMMAND_GROUP_EFFECTS::GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CBattleEntity*>& membersList)
 {
     auto& packet = this->data();
 
@@ -32,9 +32,11 @@ GP_SERV_COMMAND_GROUP_EFFECTS::GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<C
     // When using multiple map processes across different IPs, the latency
     // in communication combined with players joining/leaving at the same time
     // can cause the party size to be larger than the packet size.
+    // Trusts share these five slots with other party members. The local player
+    // is omitted; their own status icons use a different packet.
     for (std::size_t idx = 0; idx < membersList.size() && idx < 5; ++idx)
     {
-        const CCharEntity* PMember = membersList[idx];
+        const CBattleEntity* PMember = membersList[idx];
 
         packet.Members[idx].UniqueNo = PMember->id;
         packet.Members[idx].ActIndex = PMember->targid;

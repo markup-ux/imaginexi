@@ -5703,6 +5703,17 @@ status_effects:
       - no_cancel
       - hide_timer
 
+  # Blue Mage Refueling. Own buff, job-ability haste, so it stacks with
+  # Haste, March, and gear haste.
+  refueling:
+    id: 814
+    flags:
+      - dispelable
+      - empathy
+      - death
+    element: wind
+    sort_key: 100
+
   # Not a retail effect
   na:
     id: 232

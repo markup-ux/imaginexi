@@ -1,3 +1,15 @@
+# Imagine XI 2.0
+
+This is the Imagine XI 2.0 game server, built on [LandSandBoat](https://github.com/LandSandBoat/server).
+
+**Play:** download [ImagineXILauncher.exe](https://github.com/markup-ux/imaginexi-updates/releases/download/ixi20/ImagineXILauncher.exe) and run it. An official FFXI client is required (not included). Leave **Play on this PC** unchecked unless you are hosting.
+
+To run your own copy, follow the LandSandBoat quick start below. Custom gameplay is already wired in `modules/init.txt` under `modules/custom`. Set `zone_settings.zoneip` in `modules/custom/sql/ixi20_public_zoneip.sql` to your own public IPv4 before remote players zone. This repo does not include a home network address.
+
+Feature notes: `modules/custom/README_IXI20.md`.
+
+---
+
 <p align="center">
     <img width="256" height="256" src="res/lsb_logo_circle.png">
     <h1 align="center">LandSandBoat</h1>

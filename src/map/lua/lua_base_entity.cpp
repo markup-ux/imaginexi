@@ -15191,18 +15191,22 @@ auto CLuaBaseEntity::addBardSong(CLuaBaseEntity* PEntity, xi::StatusEffect effec
 
     uint8 maxSongs = 2;
 
-    if (PEntity && PEntity->m_PBaseEntity && PEntity->m_PBaseEntity->objtype == TYPE_PC)
+    if (PEntity && PEntity->m_PBaseEntity)
     {
-        CCharEntity* PCaster = static_cast<CCharEntity*>(PEntity->m_PBaseEntity);
-        CItemWeapon* PItem   = static_cast<CItemWeapon*>(PCaster->getEquip(SLOT_RANGED));
-
-        if (PItem == nullptr || PItem->getID() == 65535 ||
-            !(PItem->getSkillType() == xi::SkillType::StringInstrument || PItem->getSkillType() == xi::SkillType::WindInstrument))
+        auto* caster = dynamic_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
+        if (caster != nullptr && caster->objtype == TYPE_PC)
         {
-            maxSongs = 1;
-        }
+            auto* PCaster = static_cast<CCharEntity*>(caster);
+            CItemWeapon* PItem = static_cast<CItemWeapon*>(PCaster->getEquip(SLOT_RANGED));
 
-        maxSongs += PCaster->getMod(xi::Mod::MAXIMUM_SONGS_BONUS);
+            if (PItem == nullptr || PItem->getID() == 65535 ||
+                !(PItem->getSkillType() == xi::SkillType::StringInstrument || PItem->getSkillType() == xi::SkillType::WindInstrument))
+            {
+                maxSongs = 1;
+            }
+
+            maxSongs = static_cast<uint8>(maxSongs + PCaster->getMod(xi::Mod::MAXIMUM_SONGS_BONUS));
+        }
     }
 
     return PBattle->StatusEffectContainer->ApplyBardEffect(PEffect, maxSongs);

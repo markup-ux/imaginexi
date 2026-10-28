@@ -52,6 +52,7 @@ public:
     void   setCastTime(uint32 casttime);
     void   setMPCost(uint16 mpcost);
     bool   canTargetEnemy();
+    bool   dealsDamage();
     uint8  isAoE();
     float  getRadius();
     bool   tookEffect();

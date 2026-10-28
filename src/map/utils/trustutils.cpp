@@ -192,6 +192,7 @@ auto trustutils::SpawnTrust(CCharEntity* PMaster, uint32 TrustID) -> CTrustEntit
 
     PMaster->loc.zone->InsertTRUST(PTrust);
     PTrust->Spawn();
+    PTrust->StatusEffectContainer->UpdateStatusIcons();
 
     PMaster->PParty->ReloadParty();
 

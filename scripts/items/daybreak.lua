@@ -17,6 +17,10 @@ itemObject.onItemEquip = function(target, item)
 end
 
 itemObject.onItemUnequip = function(target, item)
+    -- Job-learned Dispelga (RDM 37) is saved; Daybreak's grant is session-only.
+    if target:getJobLevel(xi.job.RDM) >= 37 then
+        return
+    end
     target:delSpell(xi.magic.spell.DISPELGA, { saveToDB = false })
 end
 

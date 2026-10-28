@@ -10,9 +10,16 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(mob, target, skill, action)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.HASTE, 2000, 0, 180))
+    local applied = mob:addStatusEffect(xi.effect.REFUELING, {
+        power    = 2000, -- 20%
+        duration = 180,
+        origin   = mob,
+        icon     = xi.effect.HASTE,
+    })
 
-    return xi.effect.HASTE
+    skill:setMsg(applied and xi.msg.basic.SKILL_GAIN_EFFECT or xi.msg.basic.SKILL_NO_EFFECT)
+
+    return xi.effect.REFUELING
 end
 
 return mobskillObject

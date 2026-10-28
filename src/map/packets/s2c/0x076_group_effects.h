@@ -23,7 +23,7 @@
 
 #include "base.h"
 
-class CCharEntity;
+class CBattleEntity;
 
 #pragma pack(push, 1)
 
@@ -48,5 +48,5 @@ public:
         partymemberbuffs_t Members[5]; // PS2: (New; did not exist.)
     };
 
-    explicit GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CCharEntity*>& membersList);
+    explicit GP_SERV_COMMAND_GROUP_EFFECTS(const std::vector<CBattleEntity*>& membersList);
 };

@@ -41,8 +41,10 @@ class CPPModule
 {
 public:
     CPPModule()
-    : lua(::lua)
     {
+        // Do not capture ::lua here. REGISTER_CPP_MODULE runs during static init;
+        // this TU can construct before sol::state exists, and a member reference
+        // to that object then dangles. Module methods use the global ::lua instead.
         moduleutils::RegisterCPPModule(this);
     }
 
@@ -68,9 +70,6 @@ public:
     {
         return new T();
     };
-
-protected:
-    sol::state& lua;
 };
 
 #define REGISTER_CPP_MODULE(className) \

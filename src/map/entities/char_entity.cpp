@@ -1110,6 +1110,11 @@ void CCharEntity::ClearTrusts()
     PTrusts.clear();
 
     ReloadPartyInc();
+    m_EffectsChanged = true;
+    if (PParty)
+    {
+        PParty->EffectsChanged();
+    }
 }
 
 auto CCharEntity::persist() const -> CharPersist

@@ -303,6 +303,12 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             {
                 updatemask = 0x57;
             }
+            else if (PEntity->IsDynamicEntity())
+            {
+                // Static mobs take their model from the zone data. A dynamic mob has
+                // none, so the Model flag has to be set or the client draws a beastman.
+                updatemask |= UPDATE_LOOK;
+            }
             if (PEntity->animationsub != 0)
             {
                 ref<uint8>(0x2A) = 4;
@@ -593,6 +599,10 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     else if (PEntity->isRenamed)
     {
         updatemask |= UPDATE_NAME;
+        if (PEntity->look.size != MODEL_EQUIPPED && PEntity->look.size != MODEL_CHOCOBO)
+        {
+            updatemask |= UPDATE_LOOK;
+        }
         ref<uint8>(0x0A) |= updatemask;
 
         this->setSize(0x48);
@@ -601,8 +611,10 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         auto nameOffset = 0x34;
         auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
 
-        // Mobs and NPC's targid's live in the range 0-1023
-        if (PEntity->targid < 1024)
+        // Static mobs and NPCs use targid 0-1023. Dynamic entities use 0x700-0x8FF.
+        // Both need the 0x01 marker. Without it the client reads the custom name
+        // as equipment and a monster is drawn as an armed humanoid.
+        if (PEntity->targid < 1024 || PEntity->IsDynamicEntity())
         {
             ref<uint16>(0x34) = 0x01;
             nameOffset        = 0x35;

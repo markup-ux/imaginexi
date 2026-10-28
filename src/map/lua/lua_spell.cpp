@@ -122,6 +122,11 @@ bool CLuaSpell::canTargetEnemy()
     return m_PLuaSpell->canTargetEnemy();
 }
 
+bool CLuaSpell::dealsDamage()
+{
+    return m_PLuaSpell->dealsDamage();
+}
+
 uint16 CLuaSpell::getTotalTargets()
 {
     return m_PLuaSpell->getTotalTargets();
@@ -201,6 +206,8 @@ void CLuaSpell::Register()
     SOL_REGISTER("setAnimation", CLuaSpell::setAnimation);
     SOL_REGISTER("setCastTime", CLuaSpell::setCastTime);
     SOL_REGISTER("setMPCost", CLuaSpell::setMPCost);
+    SOL_REGISTER("canTargetEnemy", CLuaSpell::canTargetEnemy);
+    SOL_REGISTER("dealsDamage", CLuaSpell::dealsDamage);
     SOL_REGISTER("isAoE", CLuaSpell::isAoE);
     SOL_REGISTER("getRadius", CLuaSpell::getRadius);
     SOL_REGISTER("tookEffect", CLuaSpell::tookEffect);

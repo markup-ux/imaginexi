@@ -24,6 +24,7 @@
 
 #include "alliance.h"
 #include "entities/battle_entity.h"
+#include "entities/trust_entity.h"
 #include "ipc_client.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
@@ -1281,8 +1282,8 @@ void CParty::PushEffectsPacket()
 
         for (auto& PMember : members)
         {
-            auto*                     PMemberChar = static_cast<CCharEntity*>(PMember);
-            std::vector<CCharEntity*> sameZoneMembers;
+            auto*                       PMemberChar = static_cast<CCharEntity*>(PMember);
+            std::vector<CBattleEntity*> sameZoneMembers;
 
             for (auto& memberinfo : info)
             {
@@ -1292,6 +1293,19 @@ void CParty::PushEffectsPacket()
                     if (PPartyMember && PPartyMember->getZone() == PMemberChar->getZone())
                     {
                         sameZoneMembers.push_back(PPartyMember);
+                    }
+                }
+            }
+
+            // Trusts are party members on the client, but they are not characters.
+            CBattleEntity* PLeader = GetLeader();
+            if (PLeader && PLeader->objtype == TYPE_PC && PLeader->getZone() == PMemberChar->getZone())
+            {
+                for (auto* PTrust : static_cast<CCharEntity*>(PLeader)->PTrusts)
+                {
+                    if (PTrust && PTrust->getZone() == PMemberChar->getZone())
+                    {
+                        sameZoneMembers.push_back(PTrust);
                     }
                 }
             }

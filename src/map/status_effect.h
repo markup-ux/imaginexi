@@ -31,7 +31,7 @@
 #include "data/enums/status_effect.h"
 #include "data/enums/status_effect_flag.h"
 
-#define MAX_EFFECTID 814 // 768 real + 46 custom
+#define MAX_EFFECTID 815 // 768 real + 47 custom
 
 /************************************************************************
  *                                                                       *
